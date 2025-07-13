@@ -1,0 +1,87 @@
+/* style.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; /* Light gray background */
+}
+.table-container {
+    overflow-x: auto; /* Allows horizontal scrolling on small screens */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0; /* Light gray border */
+    vertical-align: top; /* Align content to the top in cells */
+}
+/* Styles for the sticky header row */
+th {
+    background-color: #e0e7ff; /* Light indigo for headers */
+    font-weight: 600;
+    color: #374151;
+    position: sticky; /* Sticky header for horizontal scroll */
+    top: 0; /* Stays at the top when vertical scrolling */
+    left: 0; /* Stays at the left when horizontal scrolling */
+    z-index: 2; /* Ensure header stays above content and first column */
+    white-space: nowrap; /* Prevent header text from wrapping */
+}
+/* Styles for the sticky first column (Feature) */
+td:first-child {
+    background-color: #f8fafc; /* Slightly different background for feature column */
+    font-weight: 500;
+    color: #4b5563;
+    position: sticky; /* Always sticky for the first column */
+    left: 0;
+    z-index: 1; /* Ensure it stays above content, but below sticky header */
+    white-space: nowrap; /* Prevent feature names from wrapping */
+}
+/* Adjust background for the top-left corner where both are sticky */
+th:first-child {
+    background-color: #cdd5f3; /* Darker shade for the corner where feature and header meet */
+    z-index: 3; /* Ensure the corner is on top of both sticky header and first column */
+}
+
+tr:hover {
+    background-color: #f3f4f6; /* Hover effect for rows */
+}
+.price-cell {
+    font-weight: 700;
+    color: #4f46e5; /* Indigo color for price */
+}
+.view-deal-btn {
+    display: inline-block;
+    background-color: #4f46e5;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 9999px; /* Full rounded */
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+.view-deal-btn:hover {
+    background-color: #4338ca;
+}
+
+/* Responsive adjustments for sticky columns -
+   On larger screens, we want the header row to be sticky only vertically,
+   and the first column to be sticky horizontally.
+   The previous media query was making td:first-child static, which we don't want.
+   We'll remove that specific override for td:first-child.
+*/
+@media (min-width: 1024px) {
+    /* For the header row, remove horizontal stickiness, keep vertical */
+    th {
+        left: auto; /* Remove horizontal stickiness for header */
+        position: sticky; /* Keep vertical stickiness */
+        top: 0;
+        white-space: normal; /* Allow header text to wrap on larger screens */
+    }
+    /* The first column (td:first-child) remains sticky via its general rule */
+    td:first-child {
+        white-space: normal; /* Allow feature names to wrap on larger screens */
+    }
+}
